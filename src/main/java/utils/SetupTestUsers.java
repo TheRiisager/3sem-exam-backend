@@ -1,6 +1,8 @@
 package utils;
 
 
+import entities.Breed;
+import entities.Dog;
 import entities.Role;
 import entities.User;
 
@@ -20,9 +22,15 @@ public class SetupTestUsers {
     // Also, either delete this file, when users are created or rename and add to .gitignore
     // Whatever you do DO NOT COMMIT and PUSH with the real passwords
 
-    User user = new User("user", "test");
-    User admin = new User("admin", "test");
-    User both = new User("user_admin", "test");
+    User user = new User("user", "123");
+    User admin = new User("admin", "123");
+    User both = new User("user_admin", "123");
+
+    Breed beagle = new Breed(0, "Beagle","Beagles are dogs");
+    Breed shiba = new Breed(1, "Shiba","shibas are dogs");
+
+    Dog dog1 = new Dog("Fido", "01/01/2019", "Fido er en god hund", beagle);
+    Dog dog2 = new Dog("Doge", "02/02/2020", "wow, such dog, many personality",shiba);
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
@@ -34,8 +42,14 @@ public class SetupTestUsers {
     admin.addRole(adminRole);
     both.addRole(userRole);
     both.addRole(adminRole);
+    user.addDog(dog1);
+    admin.addDog(dog2);
     em.persist(userRole);
     em.persist(adminRole);
+    em.persist(beagle);
+    em.persist(shiba);
+    em.persist(dog1);
+    em.persist(dog2);
     em.persist(user);
     em.persist(admin);
     em.persist(both);
