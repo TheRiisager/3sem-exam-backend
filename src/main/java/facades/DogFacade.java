@@ -43,6 +43,18 @@ public class DogFacade {
         return breedDTOList;
     }
 
+    public void addBreedsToDB(List<Breed> breeds){
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            for (Breed b : breeds){
+                em.persist(b);
+            }
+        } finally {
+            em.close();
+        }
+    }
+
     public Breed getBreedByname(String breedName){
         EntityManager em = emf.createEntityManager();
         Breed breed = null;

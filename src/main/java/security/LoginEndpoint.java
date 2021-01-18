@@ -52,8 +52,17 @@ public class LoginEndpoint {
         try {
             User user = USER_FACADE.getVeryfiedUser(username, password);
             String token = createToken(username, user.getRolesAsStrings());
+
+            StringBuilder res = new StringBuilder();
+            for (String string : user.getRolesAsStrings()) {
+                res.append(string);
+                res.append(",");
+            }
+            String roles = res.length() > 0 ? res.substring(0, res.length() - 1) : "";
+
             JsonObject responseJson = new JsonObject();
             responseJson.addProperty("username", username);
+            responseJson.addProperty("roles", roles);
             responseJson.addProperty("token", token);
             return Response.ok(new Gson().toJson(responseJson)).build();
 

@@ -26,12 +26,6 @@ public class SetupTestUsers {
     User admin = new User("admin", "123");
     User both = new User("user_admin", "123");
 
-    Breed beagle = new Breed(0, "Beagle","Beagles are dogs");
-    Breed shiba = new Breed(1, "Shiba","shibas are dogs");
-
-    Dog dog1 = new Dog("Fido", "01/01/2019", "Fido er en god hund", beagle);
-    Dog dog2 = new Dog("Doge", "02/02/2020", "wow, such dog, many personality",shiba);
-
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
 
@@ -42,14 +36,8 @@ public class SetupTestUsers {
     admin.addRole(adminRole);
     both.addRole(userRole);
     both.addRole(adminRole);
-    user.addDog(dog1);
-    admin.addDog(dog2);
     em.persist(userRole);
     em.persist(adminRole);
-    em.persist(beagle);
-    em.persist(shiba);
-    em.persist(dog1);
-    em.persist(dog2);
     em.persist(user);
     em.persist(admin);
     em.persist(both);

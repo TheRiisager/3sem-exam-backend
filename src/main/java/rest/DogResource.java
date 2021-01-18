@@ -51,7 +51,7 @@ public class DogResource {
     @RolesAllowed({"user","admin"})
     public String addUserDog(@HeaderParam("x-access-token") String token, String body){
         JWTdecoder decoder = new JWTdecoder(token);
-        
+
         JsonObject jsonbody = JsonParser.parseString(body).getAsJsonObject();
         String name = jsonbody.get("name").getAsString();
         String info = jsonbody.get("info").getAsString();
